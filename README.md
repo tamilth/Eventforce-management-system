@@ -1,4 +1,4 @@
-# Eventforce
+# Eventforce Management system 
 
 An event management system built on the Salesforce platform (SFDX project).
 
