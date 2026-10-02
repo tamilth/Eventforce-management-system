@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Attendee Check-In" icon-name="standard:task2">
+        <div class="slds-p-horizontal_medium">
+            <lightning-input label="Ticket number" placeholder="TKT-0001" value={ticketNumber}
+                             onchange={handleChange} onkeyup={handleKey}></lightning-input>
+            <lightning-button class="slds-m-top_small" variant="brand" label="Check in"
+                              onclick={handleCheckIn} disabled={isBusy}></lightning-button>
+            <template lwc:if={result}>
+                <div class={resultClass} role="alert">{result.message}</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

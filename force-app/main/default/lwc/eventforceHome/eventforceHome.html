@@ -1,0 +1,76 @@
+<template>
+    <lightning-card title="Upcoming Events" icon-name="standard:event">
+        <div class="slds-p-horizontal_medium">
+            <template lwc:if={error}>
+                <p class="slds-text-color_error">{error}</p>
+            </template>
+            <template lwc:elseif={hasEvents}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template for:each={events} for:item="evt">
+                        <div key={evt.Id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_medium">
+                            <article class="slds-card slds-card_boundary event-card">
+                                <div class="slds-card__header slds-grid">
+                                    <h3 class="slds-card__header-title slds-text-heading_small">{evt.Name}</h3>
+                                    <template lwc:if={evt.soldOut}>
+                                        <span class="slds-badge slds-theme_error">Sold out</span>
+                                    </template>
+                                </div>
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <p>
+                                        <lightning-icon icon-name="utility:event" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                        <lightning-formatted-date-time
+                                            value={evt.Start_Date__c} year="numeric" month="short" day="2-digit"
+                                            hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                                    </p>
+                                    <p>
+                                        <lightning-icon icon-name="utility:location" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                        {evt.venueName}
+                                    </p>
+                                    <p>
+                                        <lightning-icon icon-name="utility:moneybag" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                        {evt.priceLabel} &middot; {evt.Seats_Available__c} seats left
+                                    </p>
+                                    <p class="slds-text-color_weak slds-m-top_x-small">{evt.Description__c}</p>
+                                </div>
+                                <footer class="slds-card__footer">
+                                    <lightning-button
+                                        variant="brand" label="Register" data-id={evt.Id}
+                                        disabled={evt.soldOut} onclick={openModal}></lightning-button>
+                                </footer>
+                            </article>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template lwc:else>
+                <p class="slds-text-color_weak">No upcoming events right now.</p>
+            </template>
+        </div>
+
+        <template lwc:if={selectedEvent}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading"
+                     class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading" class="slds-modal__title slds-hyphenate">
+                            Register for {selectedEvent.Name}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-input name="attendeeName" label="Full name" required
+                                         value={attendeeName} onchange={handleChange}></lightning-input>
+                        <lightning-input name="email" type="email" label="Email" required
+                                         value={email} onchange={handleChange}></lightning-input>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                        <lightning-button variant="brand" label="Confirm registration"
+                                          class="slds-m-left_x-small" disabled={isSaving}
+                                          onclick={handleRegister}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Session</label>
+    <nameField>
+        <label>Session Title</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Sessions</pluralLabel>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Event management: venues, events, sessions and attendee registrations.</description>
+    <formFactors>Large</formFactors>
+    <label>Eventforce</label>
+    <navType>Standard</navType>
+    <tabs>Venue__c</tabs>
+    <tabs>Event__c</tabs>
+    <tabs>Session__c</tabs>
+    <tabs>Attendee_Registration__c</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>
